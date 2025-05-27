@@ -17,7 +17,7 @@ requires = [
     'pyramid_retry',
     'pyramid_tm',
     'SQLAlchemy',
-    'mysql-connector-python',   # <- Agrega esta línea
+    'PyMySQL',  # usar PyMySQL para conectar MySQL
     'transaction',
     'zope.sqlalchemy',
     'waitress',
