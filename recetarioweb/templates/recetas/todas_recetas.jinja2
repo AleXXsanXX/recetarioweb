@@ -1,0 +1,30 @@
+{% extends "../layout.jinja2" %}
+{% block title %}Todas las Recetas{% endblock %}
+
+{% block content %}
+<h1 style="margin-bottom: 1rem;">Recetas de todos los usuarios</h1>
+
+{% if recetas %}
+  <div class="recetas-listado">
+    {% for receta in recetas %}
+      <div class="receta-card">
+        <div>
+          <h3 style="margin: 0;">
+            <a href="{{ request.route_url('ver_receta', id=receta.id) }}">{{ receta.titulo }}</a>
+          </h3>
+          <p style="margin: 0.5rem 0 0;">
+            por <strong>{{ receta.autor.nombre }}</strong>
+          </p>
+        </div>
+        {% if receta.autor.foto_perfil %}
+          <img src="{{ request.static_url('recetarioweb:static/uploads/usuarios/' ~ receta.autor.foto_perfil) }}"
+               alt="Foto de {{ receta.autor.nombre }}"
+               class="foto-perfil-mini">
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No hay recetas disponibles.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "layout.jinja2" %}
+{% block content %}
+
+<h1>Mis Recetas</h1>
+
+{% if recetas %}
+  <div class="recetas-listado">
+    {% for receta in recetas %}
+      <div class="receta-card">
+        <div>
+          <a href="{{ request.route_url('ver_receta', id=receta.id) }}">{{ receta.titulo }}</a>
+        </div>
+        <div>
+          <a href="{{ request.route_url('editar_receta', id=receta.id) }}" class="boton-pequeno">Editar</a>
+          <form action="{{ request.route_url('eliminar_receta', id=receta.id) }}" method="POST" class="form-inline">
+            <button type="submit" class="boton-pequeno boton-eliminar" onclick="return confirm('¿Estás seguro de eliminar esta receta?');">Eliminar</button>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>Aún no has agregado recetas.</p>
+{% endif %}
+
+{% endblock %}
+

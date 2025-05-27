@@ -1,0 +1,22 @@
+{% extends 'layout.jinja2' %}
+
+{% block title %}Bienvenido a Recetario Web{% endblock %}
+
+{% block content %}
+  <div class="home-banner">
+    <img src="{{ request.static_url('recetarioweb:static/img/utencilios.png') }}" alt="Chef Banner">
+    <div class="home-banner-text">
+      <h1>Bienvenido a <span>Recetario Web</span></h1>
+      <p>Descubre, comparte y cocina tus mejores recetas.</p>
+      <div class="home-buttons">
+        <a href="{{ request.route_url('registro') }}"><button>Registrarse gratis</button></a>
+        <a href="{{ request.route_url('login') }}"><button class="secondary">Iniciar sesión</button></a>
+      </div>
+    </div>
+  </div>
+
+  <section class="chef-randy-destacado">
+    <img src="{{ request.static_url('recetarioweb:static/img/randy.jpg') }}" alt="Chef Randy">
+  </section>
+{% endblock %}
+

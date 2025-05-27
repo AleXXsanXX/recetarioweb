@@ -1,0 +1,31 @@
+{% extends 'layout.jinja2' %}
+
+{% block title %}Iniciar Sesión - Recetario Web{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <h2>Iniciar Sesión</h2>
+
+  <form method="POST" action="{{ request.route_url('login') }}" class="formulario">
+    <label for="nombre">Nombre de usuario:</label>
+    <input type="text" name="nombre" required>
+
+    <label for="contrasena">Contraseña:</label>
+    <input type="password" name="contrasena" required>
+
+    <button type="submit" class="boton-rojo">Ingresar</button>
+  </form>
+
+  <div class="form-links">
+    <a href="{{ request.route_url('registro') }}">¿No tienes cuenta? Regístrate aquí</a> |
+    <a href="{{ request.route_url('home') }}">Volver al inicio</a>
+  </div>
+
+  {% if error %}
+    <p class="mensaje-error">{{ error }}</p>
+  {% endif %}
+</div>
+{% endblock %}
+
+
+

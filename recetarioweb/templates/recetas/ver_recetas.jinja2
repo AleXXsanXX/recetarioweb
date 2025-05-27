@@ -1,0 +1,34 @@
+{% extends "layout.jinja2" %}
+{% block content %}
+
+<div class="bienvenida-container">
+
+  {% if usuario_logueado %}
+    <div class="bienvenida-header">
+      <div class="bienvenida-texto">
+        <p>Bienvenido/a, <strong>{{ usuario_logueado.nombre }}</strong></p>
+      </div>
+      {% if usuario_logueado.foto_perfil %}
+        <div class="bienvenida-foto">
+          <img src="{{ request.static_url('recetarioweb:static/uploads/usuarios/' ~ usuario_logueado.foto_perfil) }}"
+               alt="Foto de perfil">
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <h1>¡Bienvenido al Recetario Mexicano!</h1>
+  <p>Descubre y comparte recetas auténticas de la cocina tradicional mexicana.</p>
+
+  <p>Este espacio es ideal para guardar tus platillos favoritos, explorar ideas de otros cocineros y conservar el sabor de nuestras raíces.</p>
+
+  <h2>¿Sabías esto?</h2>
+  <p>La <strong>cochinita pibil</strong>, originaria de Yucatán, se prepara con carne de cerdo adobada en achiote y jugo de naranja agria, cocida lentamente en horno bajo tierra.</p>
+
+  <p>Pronto podrás explorar recetas, comentarlas, y compartir tus propias creaciones con otros usuarios apasionados por la cocina.</p>
+</div>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,3 @@
+[run]
+source = recetarioweb
+omit = recetarioweb/test*

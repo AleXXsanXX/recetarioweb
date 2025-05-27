@@ -1,0 +1,99 @@
+<style>
+  body {
+    background: url("{{ request.static_url('recetarioweb:static/img/rees.jpg') }}") no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .agregar-receta-fondo {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .titulo-agregar-receta {
+    text-align: center;
+    color: #b00020;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .formulario label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .formulario input[type="text"],
+  .formulario textarea,
+  .formulario input[type="file"] {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: inherit;
+  }
+
+  .formulario textarea {
+    resize: vertical;
+  }
+
+  .boton-rojo {
+    margin-top: 1.5rem;
+    background-color: #b00020;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .boton-rojo:hover {
+    background-color: #8c001a;
+  }
+
+  .mensaje-error {
+    color: #b00020;
+    background-color: #ffe6e6;
+    padding: 0.5rem;
+    border: 1px solid #ffcccc;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+</style>
+
+
+<h1 class="titulo-agregar-receta">Agregar una nueva receta</h1>
+
+<div class="form-container agregar-receta-fondo">
+  {% if error %}
+    <p class="mensaje-error">{{ error }}</p>
+  {% endif %}
+
+  <form class="formulario" action="{{ request.route_url('agregar_receta') }}" method="post" enctype="multipart/form-data">
+      <label for="titulo">Título:</label>
+      <input type="text" id="titulo" name="titulo" required>
+
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" name="descripcion" rows="5" required></textarea>
+
+      <label for="ingredientes">Ingredientes:</label>
+      <textarea id="ingredientes" name="ingredientes" rows="5" required></textarea>
+
+      <label for="instrucciones">Instrucciones:</label>
+      <textarea id="instrucciones" name="instrucciones" rows="5" required></textarea>
+
+      <label for="imagen">Imagen del platillo (opcional):</label>
+      <input type="file" id="imagen" name="imagen">
+
+      <button type="submit" class="boton-rojo">Guardar receta</button>
+  </form>
+</div>

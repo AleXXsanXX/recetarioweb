@@ -1,0 +1,71 @@
+{% extends "../layout.jinja2" %}
+{% block title %}{{ receta.titulo }}{% endblock %}
+
+{% block content %}
+<div class="receta-detalle">
+
+  {% if usuario_logueado %}
+    <div class="autor-info-flotante">
+      <img src="{{ request.static_url('recetarioweb:static/uploads/usuarios/' ~ usuario_logueado.foto_perfil) }}"
+           alt="Tu foto de perfil">
+      <strong>{{ usuario_logueado.nombre }}</strong>
+    </div>
+  {% endif %}
+
+  <h1>{{ receta.titulo }}</h1>
+
+  {% if receta.imagen %}
+    <img src="{{ request.static_url('recetarioweb:static/uploads/recetas/' ~ receta.imagen) }}"
+         alt="Imagen del platillo"
+         class="receta-img">
+  {% endif %}
+
+  {% for mensaje in request.session.pop_flash('error') %}
+    <p class="mensaje-error">{{ mensaje }}</p>
+  {% endfor %}
+
+  <p><strong>Ingredientes:</strong></p>
+  <p>{{ receta.ingredientes }}</p>
+
+  <p><strong>Instrucciones:</strong></p>
+  <p>{{ receta.instrucciones }}</p>
+
+  <p><strong>Autor:</strong> {{ receta.autor.nombre }}</p>
+
+  <div class="comentarios">
+    <hr>
+    <h2>Comentarios</h2>
+
+    {% if receta.comentarios %}
+      <ul>
+        {% for comentario in receta.comentarios %}
+          <li>
+            <strong>{{ comentario.usuario.nombre }}:</strong> {{ comentario.contenido }} <br>
+            <small>{{ comentario.fecha.strftime('%d/%m/%Y %H:%M') }}</small>
+            {% if request.authenticated_userid and comentario.usuario_id == request.authenticated_userid|int %}
+              <form method="get" action="{{ request.route_url('eliminar_comentario', id=comentario.id) }}">
+                <button type="submit" onclick="return confirm('¿Eliminar este comentario?')">Eliminar</button>
+              </form>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No hay comentarios aún.</p>
+    {% endif %}
+
+    {% if request.authenticated_userid %}
+      <h3>Agregar un comentario</h3>
+      <form method="post" action="{{ request.route_url('agregar_comentario', id=receta.id) }}">
+        <textarea name="contenido" rows="4" required></textarea><br>
+        <input type="submit" value="Comentar">
+      </form>
+    {% else %}
+      <p><a href="{{ request.route_url('login') }}">Inicia sesión</a> para comentar.</p>
+    {% endif %}
+  </div>
+
+  <hr>
+  <a href="{{ request.route_url('recetas') }}">Volver a la lista de recetas</a>
+</div>
+{% endblock %}

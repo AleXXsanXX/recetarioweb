@@ -1,0 +1,11 @@
+{% extends "layout.jinja2" %}
+{% block content %}
+<h2>¡Vaya! Página no encontrada</h2>
+<p>Lo sentimos, la página que buscas no existe.</p>
+
+{% if usuario_logueado %}
+  <p>Volver al <a href="{{ request.route_url('ver_recetas') }}">inicio</a>, {{ usuario_logueado.nombre }}.</p>
+{% else %}
+  <p>Volver al <a href="{{ request.route_url('home') }}">inicio</a>.</p>
+{% endif %}
+{% endblock %}
