@@ -1,7 +1,11 @@
+import os
 from setuptools import setup, find_packages
 
-README = 'Recetario Web'
-CHANGES = ''
+here = os.path.abspath(os.path.dirname(__file__))
+
+# Si no existen README.txt o CHANGES.txt, Render puede fallar, así que usa texto por defecto
+README = open(os.path.join(here, 'README.txt'), encoding='utf-8').read() if os.path.exists('README.txt') else ''
+CHANGES = open(os.path.join(here, 'CHANGES.txt'), encoding='utf-8').read() if os.path.exists('CHANGES.txt') else ''
 
 requires = [
     'alembic',
@@ -12,7 +16,7 @@ requires = [
     'pyramid_retry',
     'pyramid_tm',
     'SQLAlchemy',
-    'PyMySQL',  # usar PyMySQL para conectar MySQL
+    'PyMySQL',
     'transaction',
     'zope.sqlalchemy',
     'waitress',
@@ -26,8 +30,8 @@ tests_require = [
 
 setup(
     name='recetarioweb',
-    version='0.0',
-    description='RecetarioWeb',
+    version='0.1',
+    description='Recetario Web',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
         'Programming Language :: Python',
@@ -39,7 +43,7 @@ setup(
     author_email='',
     url='',
     keywords='web pyramid pylons',
-    packages=find_packages(),
+    packages=find_packages(where='.'),
     include_package_data=True,
     zip_safe=False,
     extras_require={
