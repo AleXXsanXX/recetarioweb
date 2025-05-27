@@ -1,12 +1,7 @@
-import os
-
 from setuptools import setup, find_packages
 
-here = os.path.abspath(os.path.dirname(__file__))
-with open(os.path.join(here, 'README.txt')) as f:
-    README = f.read()
-with open(os.path.join(here, 'CHANGES.txt')) as f:
-    CHANGES = f.read()
+README = 'Recetario Web'
+CHANGES = ''
 
 requires = [
     'alembic',
@@ -24,7 +19,7 @@ requires = [
 ]
 
 tests_require = [
-    'WebTest >= 1.3.1',  # py3 compat
+    'WebTest >= 1.3.1',
     'pytest>=3.7.4',
     'pytest-cov',
 ]
