@@ -10,6 +10,15 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from .meta import Base
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine
+
+Base = declarative_base()
+
+# Aquí la cadena de conexión a la base de datos, ejemplo SQLite
+engine = create_engine('sqlite:///recetarioweb.sqlite')
+
+# Luego tus clases modelo, ej. Usuario, Receta, etc
 
 
 class Usuario(Base):
