@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: recetarioweb
-    env: python
-    buildCommand: pip install -e .
-    startCommand: pserve production.ini
-
