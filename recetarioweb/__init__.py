@@ -4,6 +4,7 @@ from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 from recetarioweb.models.mymodel import Usuario
 
+
 def get_user(request):
     user_id = request.authenticated_userid
     if user_id:
@@ -50,4 +51,9 @@ def main(global_config, **settings):
         config.add_request_method(get_user, 'user', reify=True)
         
         config.scan()
+        from sqlalchemy import engine_from_config
+        from recetarioweb.models.meta import Base 
+        engine = engine_from_config(settings, 'sqlalchemy.')
+        Base.metadata.create_all(engine)
+
     return config.make_wsgi_app()
