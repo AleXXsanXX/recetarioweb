@@ -2,6 +2,6 @@ services:
   - type: web
     name: recetarioweb
     env: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -e .
     startCommand: pserve production.ini
 
