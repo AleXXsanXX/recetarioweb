@@ -1,9 +1,9 @@
-from recetarioweb.models.mymodel import Base, engine
-
-def main():
-    print("Creando tablas en la base de datos...")
-    Base.metadata.create_all(bind=engine)
-    print("Tablas creadas correctamente.")
+from sqlalchemy import engine_from_config
+from pyramid.paster import get_appsettings, setup_logging
+from recetarioweb.models.mymodel import Base
+import os
 
 if __name__ == "__main__":
-    main()
+    settings = get_appsettings("production.ini")  # Asegúrate de que production.ini esté en tu raíz del proyecto
+    engine = engine_from_config(settings, 'sqlalchemy.')
+    Base.metadata.create_all(engine)
