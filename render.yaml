@@ -3,4 +3,4 @@ services:
     name: recetarioweb
     env: python
     buildCommand: pip install -e .
-    startCommand: gunicorn recetarioweb:main --paste production.ini
+    startCommand: pserve production.ini
